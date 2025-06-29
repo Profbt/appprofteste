@@ -1605,8 +1605,8 @@ body {
     min-width: 0;
   }
   #splash-informativo {
-    align-items: flex-start;
-    padding-top: 10vw;
+    align-items: center !important;
+    padding-top: 0 !important;
   }
   #splash-img {
     max-width: 90vw;

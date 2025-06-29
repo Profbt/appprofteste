@@ -7,12 +7,12 @@ const splashConfig = {
   ativo: false, // true para ativar, false para desativar manualmente
   dataInicio: '2025-06-28', // formato: 'YYYY-MM-DD'
   dataFim: '2025-06-29',
-  mensagem: '',
+  mensagem: 'Compareça a nossa festa Junina!, traga sua família.<br>Todos são bem vindos!',
   botao: {
     texto: 'Não esqueça', //deixe vazio para desativar o botão
     url: ''
   },
-  imagem: 'assets/images/splash.webp' // Agora usando imagem local
+  imagem: '' // Agora usando imagem local
 };
 
 // --- NÃO ALTERE ABAIXO DESTA LINHA, APENAS SE SOUBER JS ---
