@@ -18,6 +18,7 @@ class ModernApp {
     console.log('⚙️ Executando init()...');
     this.initThemeToggle();
     this.createParticleBackground();
+    this.initScrollAnimations();
     this.initInteractiveElements();
     this.setupLoadingScreen();
     this.setupEventListeners();
@@ -354,48 +355,111 @@ class ModernApp {
     document.head.appendChild(style);
   }
 
+  initScrollAnimations() {
+    // Verificar se o usuário prefere movimento reduzido
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const observerOptions = {
+      threshold: 0.1, // Reduzido para melhor performance
+      rootMargin: '0px 0px -20px 0px' // Reduzido para melhor performance
+    };
+
+    // Usar IntersectionObserver com throttling
+    let observer;
+    
+    // Throttle para melhor performance
+    const throttledObserve = (() => {
+      let timeout;
+      return (entries) => {
+        if (timeout) return;
+        
+        timeout = setTimeout(() => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              // Parar de observar após animar
+              observer.unobserve(entry.target);
+            }
+          });
+          timeout = null;
+        }, 16); // ~60fps
+      };
+    })();
+
+    observer = new IntersectionObserver(throttledObserve, observerOptions);
+
+    // Observar apenas elementos essenciais
+    const elementsToObserve = document.querySelectorAll('.app-link, .emergency-section, .social-media');
+    elementsToObserve.forEach(el => {
+      // Adicionar classe inicial para evitar FOUC
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      observer.observe(el);
+    });
+  }
+
   createParticleBackground() {
     const container = document.querySelector('.app-container');
     if (!container) return;
+
+    // Verificar se o usuário prefere movimento reduzido
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
 
     // Limpa partículas antigas
     const oldParticles = container.querySelectorAll('.particle');
     oldParticles.forEach(p => p.remove());
 
-    // Estrelas fixas e piscantes aprimoradas
-    const totalStars = 120;
-    for (let i = 0; i < totalStars; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      // Mais variedade de tamanhos
-      const isBig = Math.random() > 0.92;
-      const size = isBig ? (Math.random() * 2.5 + 2.5) : (Math.random() * 1.5 + 0.7);
-      const left = Math.random() * 100;
-      const top = Math.random() * 100;
-      // Só tons de branco e azul claro
-      const colorOptions = [
-        'rgba(255,255,255,1)', // branco puro
-        'rgba(255,255,255,0.85)',
-        'rgba(180,210,255,0.85)', // azul claro
-        'rgba(180,210,255,1)'
-      ];
-      const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
-      particle.style.cssText = `
-        left: ${left}vw;
-        top: ${top}vh;
-        width: ${size}px;
-        height: ${size}px;
-        background: ${color};
-        opacity: 1;
-        border-radius: 50%;
-        box-shadow: 0 0 ${isBig ? size*8 : size*3}px ${color};
-        animation: ${(isBig ? 'starTwinkleBig' : 'starTwinkle')} ${(8 + Math.random() * 8).toFixed(1)}s ease-in-out infinite;
-        animation-delay: ${(Math.random() * 8).toFixed(1)}s;
-        position: fixed;
-        pointer-events: none;
-        z-index: 0;
-      `;
-      container.appendChild(particle);
+    // Reduzir número de partículas para melhor performance
+    const totalStars = 60; // Reduzido de 120 para 60
+    
+    // Criar partículas em lotes para melhor performance
+    const createParticleBatch = (startIndex, batchSize) => {
+      for (let i = startIndex; i < Math.min(startIndex + batchSize, totalStars); i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const isBig = Math.random() > 0.92;
+        const size = isBig ? (Math.random() * 2 + 2) : (Math.random() * 1 + 0.5); // Tamanhos reduzidos
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        
+        const colorOptions = [
+          'rgba(255,255,255,0.8)',
+          'rgba(180,210,255,0.6)'
+        ];
+        const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+        
+        particle.style.cssText = `
+          left: ${left}vw;
+          top: ${top}vh;
+          width: ${size}px;
+          height: ${size}px;
+          background: ${color};
+          opacity: 0.6;
+          border-radius: 50%;
+          box-shadow: 0 0 ${isBig ? size*4 : size*2}px ${color};
+          animation: ${isBig ? 'starTwinkleBig' : 'starTwinkle'} ${(6 + Math.random() * 4).toFixed(1)}s ease-in-out infinite;
+          animation-delay: ${(Math.random() * 6).toFixed(1)}s;
+          position: fixed;
+          pointer-events: none;
+          z-index: 0;
+          will-change: opacity, transform;
+        `;
+        
+        container.appendChild(particle);
+      }
+    };
+
+    // Criar partículas em lotes para não bloquear a UI
+    const batchSize = 10;
+    for (let i = 0; i < totalStars; i += batchSize) {
+      setTimeout(() => {
+        createParticleBatch(i, batchSize);
+      }, i * 10); // 10ms entre lotes
     }
   }
 
@@ -419,23 +483,47 @@ class ModernApp {
   }
 
   initializePWA() {
-// Verificar se é PWA instalado
-if (window.matchMedia('(display-mode: standalone)').matches) {
+    // Verificar se é PWA instalado
+    if (window.matchMedia('(display-mode: standalone)').matches) {
       console.log('🚀 Executando como PWA instalado');
       document.body.classList.add('pwa-mode');
     }
 
-    // Service Worker
+    // Service Worker - Registro otimizado
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(registration => {
-            console.log('✅ Service Worker registrado:', registration);
-          })
-          .catch(error => {
-            console.log('❌ Erro no Service Worker:', error);
+      // Usar requestIdleCallback para não bloquear a UI
+      const registerSW = () => {
+        navigator.serviceWorker.register('service-worker.js', {
+          scope: '/',
+          updateViaCache: 'none' // Sempre buscar atualizações
+        })
+        .then(registration => {
+          console.log('✅ Service Worker registrado:', registration);
+          
+          // Verificar atualizações periodicamente
+          registration.addEventListener('updatefound', () => {
+            console.log('🔄 Nova versão do Service Worker disponível');
           });
-      });
+          
+          // Atualizar quando nova versão estiver pronta
+          registration.addEventListener('controllerchange', () => {
+            console.log('🔄 Service Worker atualizado');
+            window.location.reload();
+          });
+        })
+        .catch(error => {
+          console.warn('⚠️ Erro no Service Worker:', error);
+          // Não mostrar erro para o usuário se for apenas um warning
+        });
+      };
+
+      // Registrar quando a página estiver ociosa
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(registerSW, { timeout: 5000 });
+      } else {
+        // Fallback para navegadores que não suportam requestIdleCallback
+        setTimeout(registerSW, 1000);
+      }
     }
 
     // Detectar mudanças de conectividade
