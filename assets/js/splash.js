@@ -2,6 +2,7 @@
 // Edite o objeto abaixo para ativar/desativar, trocar mensagem, imagem, botão e datas
 // Para desativar, basta colocar ativo: false ou ajustar as datas
 // Para imagens do Google Drive, use o formato: https://drive.google.com/uc?id=ID_DA_IMAGEM
+// Após fazer qualquer alteração precisa alterar a versão do serviçe worker.
 
 const splashConfig = {
   ativo: false, // true para ativar, false para desativar manualmente
