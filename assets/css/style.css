@@ -1579,6 +1579,7 @@ body {
   align-items: center;
   animation: none;
   box-sizing: border-box;
+  margin: 0 16px;
 }
 #splash-img {
   max-width: 100%;
@@ -1597,12 +1598,17 @@ body {
   margin-bottom: 18px;
   font-family: 'Exo 2', 'Urbanist', sans-serif;
   word-break: break-word;
+  margin-top: 44px;
+  width: 100%;
+  z-index: 1;
+  text-align: center;
 }
 @media (max-width: 600px) {
   .splash-content {
     padding: 16px 4vw 16px 4vw;
     max-width: 98vw;
     min-width: 0;
+    margin: 0 8px;
   }
   #splash-informativo {
     align-items: center !important;
@@ -1697,6 +1703,7 @@ body {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   border-bottom-right-radius: 0;
+  z-index: 2;
 }
 .splash-close-x svg circle {
   fill: transparent;

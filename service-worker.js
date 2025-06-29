@@ -11,7 +11,6 @@ const STATIC_ASSETS = [
   '/index.html',
   '/assets/css/style.css',
   '/assets/js/app.js',
-  '/assets/js/splash.js',
   '/assets/images/logo.png',
   '/assets/images/logo.webp',
   '/assets/images/icons/favicon.ico',
