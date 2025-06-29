@@ -17,7 +17,6 @@ class ModernApp {
   init() {
     console.log('⚙️ Executando init()...');
     this.initThemeToggle();
-    this.createParticleBackground();
     this.initScrollAnimations();
     this.initInteractiveElements();
     this.setupLoadingScreen();
@@ -356,111 +355,20 @@ class ModernApp {
   }
 
   initScrollAnimations() {
-    // Verificar se o usuário prefere movimento reduzido
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-
-    const observerOptions = {
-      threshold: 0.1, // Reduzido para melhor performance
-      rootMargin: '0px 0px -20px 0px' // Reduzido para melhor performance
-    };
-
-    // Usar IntersectionObserver com throttling
-    let observer;
-    
-    // Throttle para melhor performance
-    const throttledObserve = (() => {
-      let timeout;
-      return (entries) => {
-        if (timeout) return;
-        
-        timeout = setTimeout(() => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              // Parar de observar após animar
-              observer.unobserve(entry.target);
-            }
-          });
-          timeout = null;
-        }, 16); // ~60fps
-      };
-    })();
-
-    observer = new IntersectionObserver(throttledObserve, observerOptions);
-
-    // Observar apenas elementos essenciais
-    const elementsToObserve = document.querySelectorAll('.app-link, .emergency-section, .social-media');
-    elementsToObserve.forEach(el => {
-      // Adicionar classe inicial para evitar FOUC
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      observer.observe(el);
+    // Removido: efeitos de scroll que causavam problemas
+    // Cards agora ficam sempre visíveis
+    const elementsToShow = document.querySelectorAll('.app-link, .emergency-section, .social-media');
+    elementsToShow.forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.classList.add('visible');
     });
   }
 
   createParticleBackground() {
-    const container = document.querySelector('.app-container');
-    if (!container) return;
-
-    // Verificar se o usuário prefere movimento reduzido
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-
-    // Limpa partículas antigas
-    const oldParticles = container.querySelectorAll('.particle');
-    oldParticles.forEach(p => p.remove());
-
-    // Reduzir número de partículas para melhor performance
-    const totalStars = 60; // Reduzido de 120 para 60
-    
-    // Criar partículas em lotes para melhor performance
-    const createParticleBatch = (startIndex, batchSize) => {
-      for (let i = startIndex; i < Math.min(startIndex + batchSize, totalStars); i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        const isBig = Math.random() > 0.92;
-        const size = isBig ? (Math.random() * 2 + 2) : (Math.random() * 1 + 0.5); // Tamanhos reduzidos
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        
-        const colorOptions = [
-          'rgba(255,255,255,0.8)',
-          'rgba(180,210,255,0.6)'
-        ];
-        const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
-        
-        particle.style.cssText = `
-          left: ${left}vw;
-          top: ${top}vh;
-          width: ${size}px;
-          height: ${size}px;
-          background: ${color};
-          opacity: 0.6;
-          border-radius: 50%;
-          box-shadow: 0 0 ${isBig ? size*4 : size*2}px ${color};
-          animation: ${isBig ? 'starTwinkleBig' : 'starTwinkle'} ${(6 + Math.random() * 4).toFixed(1)}s ease-in-out infinite;
-          animation-delay: ${(Math.random() * 6).toFixed(1)}s;
-          position: fixed;
-          pointer-events: none;
-          z-index: 0;
-          will-change: opacity, transform;
-        `;
-        
-        container.appendChild(particle);
-      }
-    };
-
-    // Criar partículas em lotes para não bloquear a UI
-    const batchSize = 10;
-    for (let i = 0; i < totalStars; i += batchSize) {
-      setTimeout(() => {
-        createParticleBatch(i, batchSize);
-      }, i * 10); // 10ms entre lotes
-    }
+    // Removido: partículas que causavam lentidão
+    // Site agora é mais rápido sem efeitos de fundo
+    console.log('✨ Partículas removidas para melhor performance');
   }
 
   setupHapticFeedback() {
