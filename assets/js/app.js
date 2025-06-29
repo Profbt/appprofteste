@@ -18,7 +18,6 @@ class ModernApp {
     console.log('⚙️ Executando init()...');
     this.initThemeToggle();
     this.createParticleBackground();
-    this.initScrollAnimations();
     this.initInteractiveElements();
     this.setupLoadingScreen();
     this.setupEventListeners();
@@ -353,25 +352,6 @@ class ModernApp {
       }
     `;
     document.head.appendChild(style);
-  }
-
-  initScrollAnimations() {
-    const observerOptions = {
-      threshold: CONFIG.scrollThreshold,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observar elementos para animação de scroll
-    const elementsToObserve = document.querySelectorAll('.app-link, .emergency-section, .social-media');
-    elementsToObserve.forEach(el => observer.observe(el));
   }
 
   createParticleBackground() {
