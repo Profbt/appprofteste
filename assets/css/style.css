@@ -133,7 +133,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 html {
@@ -208,11 +207,11 @@ body {
   margin-bottom: 48px;
   padding: 48px 20px 32px 20px;
   background: linear-gradient(135deg, rgba(20,48,92,0.85) 60%, rgba(30,58,92,0.80) 100%);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
   border-radius: 28px 28px 18px 18px;
   border: none;
   border-bottom: 3px solid #4fc3f7;
-  box-shadow: 0 4px 32px 0 rgba(20,48,92,0.08);
+  box-shadow: 0 2px 8px 0 rgba(20,48,92,0.08);
   position: relative;
   overflow: visible;
   animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s both;
@@ -485,13 +484,13 @@ body {
 
 .app-link {
   background: var(--card-gradient);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(4px);
   border-radius: 20px;
   padding: 30px 20px;
   text-align: center;
   text-decoration: none;
   color: var(--text-primary);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 2px 8px 0 rgba(20,48,92,0.08);
   transition: var(--transition-normal);
   display: flex;
   flex-direction: column;
@@ -1587,4 +1586,8 @@ body {
 }
 .splash-close-x:hover svg path, .splash-close-x:focus svg path {
   stroke: #e53935;
+}
+
+.theme-toggle, .app-link, .link-icon, .link-badge, .footer-author, .social-icon {
+  transition: all 0.3s ease;
 }
