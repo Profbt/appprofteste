@@ -6,13 +6,9 @@
 const splashConfig = {
   ativo: false, // true para ativar, false para desativar manualmente
   dataInicio: '2025-06-28', // formato: 'YYYY-MM-DD'
-<<<<<<< HEAD
   dataFim: '2025-06-28',
   mensagem: '2345678 ta na hora de molhar o biscoito!',
-=======
-  dataFim: '2025-06-29',
-  mensagem: 'Compareça a nossa festa Junina!, traga sua família.<br>Todos são bem vindos!',
->>>>>>> 372c815e4cacbacef1bc49b673d9bea29cacab49
+
   botao: {
     texto: 'Não esqueça', //deixe vazio para desativar o botão
     url: ''
