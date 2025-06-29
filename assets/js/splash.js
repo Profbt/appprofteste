@@ -6,7 +6,7 @@
 const splashConfig = {
   ativo: false, // true para ativar, false para desativar manualmente
   dataInicio: '2025-06-28', // formato: 'YYYY-MM-DD'
-  dataFim: '2025-06-28',
+  dataFim: '2025-06-29',
   mensagem: '2345678 ta na hora de molhar o biscoito!',
 
   botao: {
