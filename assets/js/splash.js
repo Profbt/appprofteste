@@ -7,8 +7,7 @@ const splashConfig = {
   ativo: false, // true para ativar, false para desativar manualmente
   dataInicio: '2025-06-28', // formato: 'YYYY-MM-DD'
   dataFim: '2025-06-29',
-  mensagem: '2345678 ta na hora de molhar o biscoito!',
-
+  mensagem: 'Compareça a nossa festa Junina!, traga sua família.<br>Todos são bem vindos!',
   botao: {
     texto: 'Não esqueça', //deixe vazio para desativar o botão
     url: ''
@@ -17,7 +16,7 @@ const splashConfig = {
 };
 
 // --- NÃO ALTERE ABAIXO DESTA LINHA, APENAS SE SOUBER JS ---
-(function () {
+(function(){
   // Só exibe se estiver online
   if (!navigator.onLine) return;
 
@@ -63,7 +62,7 @@ const splashConfig = {
     } else {
       btn.href = '#';
       btn.removeAttribute('target');
-      btn.onclick = function (e) {
+      btn.onclick = function(e) {
         e.preventDefault();
         splash.style.display = 'none';
       };
@@ -85,7 +84,7 @@ const splashConfig = {
   splash.querySelector('.splash-content').prepend(closeIcon);
 
   // Fechar ao clicar fora do modal
-  splash.addEventListener('mousedown', function (e) {
+  splash.addEventListener('mousedown', function(e) {
     if (e.target === splash) {
       splash.style.display = 'none';
     }

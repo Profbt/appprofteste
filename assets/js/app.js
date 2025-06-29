@@ -397,39 +397,35 @@ class ModernApp {
       document.body.classList.add('pwa-mode');
     }
 
-    // Service Worker - Registro otimizado
+    // Service Worker - Registro otimizado e atualização automática
     if ('serviceWorker' in navigator) {
-      // Usar requestIdleCallback para não bloquear a UI
       const registerSW = () => {
         navigator.serviceWorker.register('service-worker.js', {
           scope: '/',
-          updateViaCache: 'none' // Sempre buscar atualizações
+          updateViaCache: 'none'
         })
         .then(registration => {
-          console.log('✅ Service Worker registrado:', registration);
-          
-          // Verificar atualizações periodicamente
-          registration.addEventListener('updatefound', () => {
-            console.log('🔄 Nova versão do Service Worker disponível');
-          });
-          
-          // Atualizar quando nova versão estiver pronta
-          registration.addEventListener('controllerchange', () => {
-            console.log('🔄 Service Worker atualizado');
+          // Sempre busca a versão mais recente do SW
+          registration.update();
+
+          // Se um novo SW estiver esperando, força ativação imediata
+          if (registration.waiting) {
+            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+          }
+
+          // Escuta mudanças de controle e recarrega a página
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
             window.location.reload();
           });
         })
         .catch(error => {
           console.warn('⚠️ Erro no Service Worker:', error);
-          // Não mostrar erro para o usuário se for apenas um warning
         });
       };
 
-      // Registrar quando a página estiver ociosa
       if ('requestIdleCallback' in window) {
         requestIdleCallback(registerSW, { timeout: 5000 });
       } else {
-        // Fallback para navegadores que não suportam requestIdleCallback
         setTimeout(registerSW, 1000);
       }
     }
