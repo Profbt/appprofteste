@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/images/icons/favicon.ico" type="image/x-icon">
+  <title>Portal do Professor | Vicente Rijo</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- CSS Local -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- PWA Config -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2c3e50">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <img src="assets/images/logo.png" alt="Colégio Vicente Rijo" class="app-logo">
+      <h1>Portal do Professor<br>Vicente Rijo</h1>
+      <p class="app-subtitle">Acesso rápido aos recursos educacionais</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <!-- Emergency Contacts -->
+      <div class="emergency-section">
+        <button id="emergency-btn" class="emergency-btn">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          Contatos do Colégio
+          <i class="fas fa-chevron-down toggle-icon"></i>
+        </button>
+        <div id="emergency-contacts" class="contacts-container hidden">
+          <div class="contact-group">
+            <h3><i class="fas fa-user-tie"></i> Direção</h3>
+            <a href="https://wa.me/5543999585664" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Geral - Profª. Maria Beatriz
+            </a>
+            <a href="https://wa.me/5543984024719" class="contact-btn whatsapp">
+                <i class="fab fa-whatsapp"></i> Prof. Luciano Maia
+            </a>
+              <a href="https://wa.me/5543991100207" class="contact-btn whatsapp">
+                <i class="fab fa-whatsapp"></i> Profª. Ana Paula
+            </a>
+          </div>
+          
+          <div class="contact-group">
+            <h3><i class="fas fa-chalkboard-teacher"></i> Pedagogia - EM</h3>
+            <a href="https://wa.me/5543999511678" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Profª. Silmara
+            </a>
+            <a href="https://wa.me/5543999056006" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Profª. Marta Merissi
+            </a>
+            <a href="https://wa.me/5543991356677" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Profª. Neuza
+            </a>
+          </div>
+          
+          <div class="contact-group">
+            <h3><i class="fas fa-school"></i> Pedagogia - EF</h3>
+            <a href="https://wa.me/5543996281812" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Profª. Noemia
+            </a>
+            <a href="https://wa.me/554399626985" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Profª. Aline
+            </a>
+            <a href="https://wa.me/5543999999996" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Profª. Rubiane
+            </a>
+          </div>   
+
+          <div class="contact-group">
+            <h3><i class="fa-solid fa-people-roof"></i> Coordenação Técnicos</h3>
+            <a href="https://wa.me/5543999775143" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Sistemas - Everson
+            </a>
+            <a href="https://wa.me/5543999211062" class="contact-btn whatsapp">
+                <i class="fab fa-whatsapp"></i> Administração - Valtair
+              </a>
+          </div>
+          <div class="contact-group">
+            <h3><i class="fa-solid fa-person"></i> RH - Recursos Humanos</h3>
+            <a href="https://wa.me/5543998484418" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Erika Korgut
+            </a>
+        </div>
+        <div class="contact-group">
+            <h3><i class="fa-solid fa-users"></i></i> Secretaria</h3>
+            <a href="https://wa.me/5543991061076" class="contact-btn whatsapp">
+              <i class="fab fa-whatsapp"></i> Chico
+            </a>
+        </div>
+      </div>
+
+      <!-- Main Links Grid -->
+      <div class="links-grid">
+        <a href="https://registropontoseed.pr.gov.br" class="app-link">
+          <div class="link-icon">
+            <i class="fas fa-fingerprint"></i>
+          </div>
+          <span>Sistema de Ponto</span>
+        </a>
+        
+        <a href="https://rco.paas.pr.gov.br/" class="app-link">
+          <div class="link-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <span>Registro de Classe</span>
+        </a>
+        
+        <a href="https://sites.google.com/escola.pr.gov.br/muraldoprofessorvicenterijo" class="app-link">
+          <div class="link-icon">
+            <i class="fas fa-chalkboard"></i>
+          </div>
+          <span>Mural do Professor</span>
+        </a>
+                
+        <a href="https://docs.google.com/spreadsheets/d/1vlClPLWDPgd2ShuI6qdpeDYctPFJsy3S/edit" class="app-link">
+          <div class="link-icon">
+            <i class="fa-solid fa-computer"></i>
+          </div>
+          <span>Horário Laboratórios</span>
+        </a>
+        
+        <a href="mailto:provasvicenterijo@gmail.com" class="app-link">
+          <div class="link-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <span>E-mail de Provas</span>
+        </a>
+        
+        <a href="https://appsouparana.paas.pr.gov.br/login" class="app-link">
+          <div class="link-icon">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <span>Contracheque</span>
+        </a>
+      </div>
+
+      <!-- Tutorial Button -->
+      <a href="https://drive.google.com/" class="tutorial-btn">
+        <i class="fas fa-book-open"></i> Tutoriais e Manuais
+      </a>
+
+      <div class="social-media">
+        <p>Siga-nos nas redes sociais:</p>
+        <a href="https://www.instagram.com/cevicenterijo_oficial" target="_blank" class="social-icon instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/Vicente-Rijo-100011188428175" target="_blank" class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+    </div>
+    
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Desenvolvido com <i class="fas fa-heart"></i> por <a href="http://linktr.ee/profbt">Prof. Bruno Carvalho</a>, 2025</p>
+    </footer>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="assets/js/app.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
+</body>
+</html>
