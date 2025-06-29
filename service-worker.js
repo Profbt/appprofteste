@@ -1,9 +1,9 @@
 // Service Worker Otimizado - Portal do Professor v2.0
 // Cache Strategy: Cache First para recursos estáticos, Network First para HTML
 
-const CACHE_NAME = 'prof-vrijo-v2.1';
-const STATIC_CACHE = 'static-v2.1';
-const DYNAMIC_CACHE = 'dynamic-v2.1';
+const CACHE_NAME = 'prof-vrijo-v2.2';
+const STATIC_CACHE = 'static-v2.2';
+const DYNAMIC_CACHE = 'dynamic-v2.2';
 
 // Recursos estáticos essenciais (cache imediato)
 const STATIC_ASSETS = [
