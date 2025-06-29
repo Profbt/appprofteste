@@ -3,36 +3,143 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Offline | Vicente Rijo</title>
+  <title>Você está offline | Portal do Professor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      background: #0a1628;
+      color: #ffd700;
+      font-family: 'Exo 2', 'Urbanist', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .offline-container {
+      background: rgba(255,255,255,0.07);
+      border-radius: 24px;
+      box-shadow: 0 8px 40px 0 rgba(20,48,92,0.22);
+      padding: 48px 32px 32px 32px;
       text-align: center;
-      padding: 50px 20px;
-      background: #f9f9f9;
-      color: #2c3e50;
+      position: relative;
+      z-index: 2;
+      max-width: 350px;
+      width: 100%;
     }
-    h1 {
-      color: #e74c3c;
-      margin-bottom: 20px;
+    .offline-logo {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 4px 24px #ffd70088);
+      border-radius: 18px;
+      background: #14305c;
+      padding: 12px;
+      display: inline-block;
     }
-    p {
-      margin-bottom: 30px;
+    .offline-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 12px #0a1a33, 0 1px 0 #000;
     }
-    button {
-      background: #3498db;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
+    .offline-msg {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+      font-weight: 400;
+      text-shadow: 0 2px 8px #14305c55;
+    }
+    .reload-btn {
+      background: linear-gradient(135deg, #ffd700 0%, #b89c00 100%);
+      color: #0a1628;
+      font-family: 'Exo 2', 'Urbanist', Arial, sans-serif;
+      font-weight: 700;
       font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 32px;
       cursor: pointer;
+      box-shadow: 0 2px 16px 0 rgba(20,48,92,0.08);
+      transition: box-shadow 0.3s, filter 0.3s, transform 0.3s;
+      margin-top: 10px;
+    }
+    .reload-btn:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 8px 32px 0 rgba(20,48,92,0.16);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .offline-footer {
+      margin-top: 32px;
+      color: #fff9cc;
+      font-size: 0.95rem;
+      opacity: 0.7;
+      font-family: 'Urbanist', Arial, sans-serif;
+    }
+    /* Partículas de fundo */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+      opacity: 0.18;
+      filter: blur(1.5px);
+      animation: particleFloatReal 12s ease-in-out infinite;
+      transition: background 0.3s;
+    }
+    @keyframes particleFloatReal {
+      0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.18; }
+      20% { opacity: 0.28; }
+      50% { transform: translateY(-40px) scale(1.15) rotate(8deg); opacity: 0.22; }
+      80% { opacity: 0.28; }
+      100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.18; }
+    }
+    @media (max-width: 480px) {
+      .offline-container { padding: 24px 8px 18px 8px; }
+      .offline-title { font-size: 1.2rem; }
+      .offline-logo { width: 60px; height: 60px; }
     }
   </style>
 </head>
 <body>
-  <h1><i class="fas fa-unlink"></i> Você está offline</h1>
-  <p>Alguns recursos requerem conexão com a internet</p>
-  <button onclick="window.location.reload()">Tentar novamente</button>
+  <div class="offline-container">
+    <img src="assets/images/logo.png" alt="Logo Colégio Vicente Rijo" class="offline-logo">
+    <div class="offline-title">Você está offline</div>
+    <div class="offline-msg">Não foi possível conectar ao Portal do Professor.<br>Verifique sua conexão com a internet e tente novamente.</div>
+    <button class="reload-btn" onclick="window.location.reload()">Tentar novamente</button>
+    <div class="offline-footer">Portal do Professor &copy; 2025<br>Colégio Vicente Rijo</div>
+  </div>
+  <script>
+    // Partículas de fundo (estrelas)
+    for (let i = 0; i < 60; i++) {
+      const particle = document.createElement('div');
+      const isBig = Math.random() > 0.92;
+      const size = isBig ? (Math.random() * 2.5 + 2.5) : (Math.random() * 1.5 + 0.7);
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      const colorOptions = [
+        'rgba(255,255,255,1)',
+        'rgba(255,255,255,0.85)',
+        'rgba(180,210,255,0.85)',
+        'rgba(180,210,255,1)'
+      ];
+      const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+      particle.className = 'particle';
+      particle.style.cssText = `
+        left: ${left}vw;
+        top: ${top}vh;
+        width: ${size}px;
+        height: ${size}px;
+        background: ${color};
+        box-shadow: 0 0 ${isBig ? size*8 : size*3}px ${color};
+        animation-delay: ${(Math.random() * 8).toFixed(1)}s;
+      `;
+      document.body.appendChild(particle);
+    }
+  </script>
 </body>
 </html>

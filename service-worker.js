@@ -1,50 +1,43 @@
-const CACHE_NAME = 'vicente-rijo-v4';
-const OFFLINE_URL = '/offline.html';
-const PRECACHE_URLS = [
+const CACHE_NAME = 'prof-vrijo-v2';
+const urlsToCache = [
   '/',
   '/index.html',
   '/assets/css/style.css',
   '/assets/js/app.js',
-  '/images/logo.png',
-  '/manifest.json',
-  OFFLINE_URL
+  '/assets/images/logo.png',
+  '/assets/images/icons/icon-192.png',
+  '/assets/images/icons/icon-512.png',
+  '/ofline.html',
+  // Adicione outros arquivos essenciais se necessário
 ];
 
-self.addEventListener('install', (event) => {
+// Instalação: cache dos arquivos essenciais
+self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
-      .then(() => self.skipWaiting())
+      .then(cache => cache.addAll(urlsToCache))
   );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
+// Ativação: limpeza de caches antigos
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-    .then(() => self.clients.claim())
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(key => key !== CACHE_NAME)
+            .map(key => caches.delete(key))
+      )
+    )
   );
+  self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request)
-        .catch(() => caches.match(OFFLINE_URL))
-    );
-  } else {
-    event.respondWith(
-      caches.match(event.request)
-        .then((cachedResponse) => {
-          return cachedResponse || fetch(event.request);
-        })
-    );
-  }
+// Fetch: responder com cache ou rede
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
+      .catch(() => caches.match('/offline.html')) // Fallback offline
+  );
 });

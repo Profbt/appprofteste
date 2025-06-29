@@ -2,178 +2,369 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Portal do Professor - Colégio Vicente Rijo. Acesso rápido aos recursos educacionais e contatos importantes.">
+  <meta name="keywords" content="professor, portal, colégio, vicente rijo, educação, recursos">
+  <meta name="author" content="Prof. Bruno Carvalho">
+  <meta name="theme-color" content="#1a4b8c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Portal Professor">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-domain.com/">
+  <meta property="og:title" content="Portal do Professor - Vicente Rijo">
+  <meta property="og:description" content="Acesso rápido aos recursos educacionais">
+  <meta property="og:image" content="assets/images/logo.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://your-domain.com/">
+  <meta property="twitter:title" content="Portal do Professor - Vicente Rijo">
+  <meta property="twitter:description" content="Acesso rápido aos recursos educacionais">
+  <meta property="twitter:image" content="assets/images/logo.png">
+  
   <link rel="shortcut icon" href="assets/images/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="assets/images/icons/icon-192.png">
   <title>Portal do Professor | Vicente Rijo</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/css/style.css" as="style">
+  <link rel="preload" href="assets/js/app.js" as="script">
+  <link rel="preload" href="assets/images/logo.png" as="image">
+  
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Exo 2 para visual tecnológico -->
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;700;900&display=swap" rel="stylesheet">
   <!-- CSS Local -->
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- PWA Config -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#2c3e50">
 </head>
-<body>
+<body class="light-mode">
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-logo">
+        <img src="assets/images/logo.png" alt="Carregando..." class="loading-logo-img">
+      </div>
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Carregando Portal...</p>
+    </div>
+  </div>
+
   <div class="app-container">
     <!-- Header -->
     <header class="app-header">
-      <img src="assets/images/logo.png" alt="Colégio Vicente Rijo" class="app-logo">
-      <h1>Portal do Professor<br>Vicente Rijo</h1>
-      <p class="app-subtitle">Acesso rápido aos recursos educacionais</p>
+      <div class="header-glow"></div>
+      <div class="header-particles"></div>
+      <img src="assets/images/logo.png" alt="Logo Colégio Vicente Rijo" class="app-logo enhanced-logo">
+      <h1 class="header-title">Portal do Professor</h1>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar entre modo claro e escuro" style="position:absolute;top:32px;right:32px;z-index:10;">
+        <i class="fas fa-sun sun-icon"></i>
+        <i class="fas fa-moon moon-icon"></i>
+      </button>
+      <p class="app-subtitle">Acesso rápido aos recursos educacionais.</p>
     </header>
 
     <!-- Main Content -->
-    <main class="app-main">
+    <main class="app-main" role="main">
       <!-- Emergency Contacts -->
-      <div class="emergency-section">
-        <button id="emergency-btn" class="emergency-btn">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-          Contatos do Colégio
-          <i class="fas fa-chevron-down toggle-icon"></i>
+      <section class="emergency-section" aria-label="Contatos de Emergência">
+        <button id="emergency-btn" class="emergency-btn" aria-expanded="false" aria-controls="emergency-contacts">
+            <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+          <span>Contatos do Colégio</span>
+          <div class="click-indicator">
+            <span class="click-text">Clique para expandir</span>
+            <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
+          </div>
         </button>
-        <div id="emergency-contacts" class="contacts-container hidden">
+        <div id="emergency-contacts" class="contacts-container hidden" role="region" aria-labelledby="emergency-btn">
           <div class="contact-group">
-            <h3><i class="fas fa-user-tie"></i> Direção</h3>
-            <a href="https://wa.me/5543999585664" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Geral - Profª. Maria Beatriz
+            <h3><i class="fas fa-user-tie" aria-hidden="true"></i> Direção</h3>
+            <a href="https://wa.me/5543999585664" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Geral - Profª. Maria Beatriz
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
-            <a href="https://wa.me/5543984024719" class="contact-btn whatsapp">
-                <i class="fab fa-whatsapp"></i> Prof. Luciano Maia
+            <a href="https://wa.me/5543984024719" class="contact-btn whatsapp" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> Prof. Luciano Maia
+                <span class="contact-hint">Abrir WhatsApp</span>
             </a>
-              <a href="https://wa.me/5543991100207" class="contact-btn whatsapp">
-                <i class="fab fa-whatsapp"></i> Profª. Ana Paula
+              <a href="https://wa.me/5543991100207" class="contact-btn whatsapp" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Ana Paula
+                <span class="contact-hint">Abrir WhatsApp</span>
             </a>
           </div>
           
           <div class="contact-group">
-            <h3><i class="fas fa-chalkboard-teacher"></i> Pedagogia - EM</h3>
-            <a href="https://wa.me/5543999511678" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Profª. Silmara
+            <h3><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Pedagogia - EM</h3>
+            <a href="https://wa.me/5543999511678" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Silmara
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
-            <a href="https://wa.me/5543999056006" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Profª. Marta Merissi
+            <a href="https://wa.me/5543999056006" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Marta Merissi
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
-            <a href="https://wa.me/5543991356677" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Profª. Neuza
+            <a href="https://wa.me/5543991356677" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Neuza
+              <span class="contact-hint">Abrir WhatsApp</span>
+            </a>
+            <a href="https://wa.me/554391971802" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Fabiane
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
           </div>
           
           <div class="contact-group">
-            <h3><i class="fas fa-school"></i> Pedagogia - EF</h3>
-            <a href="https://wa.me/5543996281812" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Profª. Noemia
+            <h3><i class="fas fa-school" aria-hidden="true"></i> Pedagogia - EF</h3>
+            <a href="https://wa.me/5543996281812" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Noemia
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
-            <a href="https://wa.me/554399626985" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Profª. Aline
+            <a href="https://wa.me/554399626985" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Aline
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
-            <a href="https://wa.me/5543999999996" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Profª. Rubiane
+            <a href="https://wa.me/5543999999996" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Profª. Rubiane
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
           </div>   
 
           <div class="contact-group">
-            <h3><i class="fa-solid fa-people-roof"></i> Coordenação Técnicos</h3>
-            <a href="https://wa.me/5543999775143" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Sistemas - Everson
+            <h3><i class="fa-solid fa-people-roof" aria-hidden="true"></i> Coordenação Técnicos</h3>
+            <a href="https://wa.me/5543999775143" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Sistemas - Everson
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
-            <a href="https://wa.me/5543999211062" class="contact-btn whatsapp">
-                <i class="fab fa-whatsapp"></i> Administração - Valtair
+            <a href="https://wa.me/5543999211062" class="contact-btn whatsapp" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> Administração - Valtair
+                <span class="contact-hint">Abrir WhatsApp</span>
               </a>
           </div>
           <div class="contact-group">
-            <h3><i class="fa-solid fa-person"></i> RH - Recursos Humanos</h3>
-            <a href="https://wa.me/5543998484418" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Erika Korgut
+            <h3><i class="fa-solid fa-person" aria-hidden="true"></i> RH - Recursos Humanos</h3>
+            <a href="https://wa.me/5543998484418" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Erika Korgut
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
         </div>
         <div class="contact-group">
-            <h3><i class="fa-solid fa-users"></i></i> Secretaria</h3>
-            <a href="https://wa.me/5543991061076" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> Chico
+            <h3><i class="fa-solid fa-users" aria-hidden="true"></i> Secretaria</h3>
+            <a href="https://wa.me/5543991061076" class="contact-btn whatsapp" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> Chico
+              <span class="contact-hint">Abrir WhatsApp</span>
             </a>
         </div>
       </div>
 
       <!-- Main Links Grid -->
-      <div class="links-grid">
-        <a href="https://registropontoseed.pr.gov.br" class="app-link">
-          <div class="link-icon">
-            <i class="fas fa-fingerprint"></i>
-          </div>
-          <span>Sistema de Ponto</span>
-        </a>
-        
-        <a href="https://rco.paas.pr.gov.br/" class="app-link">
-          <div class="link-icon">
-            <i class="fas fa-book-open"></i>
-          </div>
-          <span>Registro de Classe</span>
-        </a>
-        
-        <a href="https://sites.google.com/escola.pr.gov.br/muraldoprofessorvicenterijo" class="app-link">
-          <div class="link-icon">
-            <i class="fas fa-chalkboard"></i>
-          </div>
-          <span>Mural do Professor</span>
-        </a>
-                
-        <a href="https://docs.google.com/spreadsheets/d/1vlClPLWDPgd2ShuI6qdpeDYctPFJsy3S/edit" class="app-link">
-          <div class="link-icon">
-            <i class="fa-solid fa-computer"></i>
-          </div>
-          <span>Horário Laboratórios</span>
-        </a>
-        
-        <a href="mailto:provasvicenterijo@gmail.com" class="app-link">
-          <div class="link-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <span>E-mail de Provas</span>
-        </a>
-        
-        <a href="https://appsouparana.paas.pr.gov.br/login" class="app-link">
-          <div class="link-icon">
-            <i class="fas fa-money-bill-wave"></i>
-          </div>
-          <span>Contracheque</span>
-        </a>
-      </div>
+      <section class="links-section" aria-label="Links Principais">
+        <div class="links-grid">
+          <a href="https://registropontoseed.pr.gov.br" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-fingerprint"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Sistema de Ponto</span>
+            <div class="link-badge">Online</div>
+          </a>
+          
+          <a href="https://rco.paas.pr.gov.br/" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-graduation-cap"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>RCO</span>
+            <div class="link-badge">Obrigatório</div>
+          </a>
+          
+          <a href="https://portaldoalunovr.vercel.app" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-globe"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Plataformas</span>
+            <div class="link-badge">Acesso</div>
+          </a>
+
+          <a href="https://sites.google.com/escola.pr.gov.br/muraldoprofessorvicenterijo" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-bullhorn"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Mural do Professor</span>
+            <div class="link-badge">Comunicados</div>
+          </a>
+
+          <a href="https://docs.google.com/spreadsheets/d/1vlClPLWDPgd2ShuI6qdpeDYctPFJsy3S/edit" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-laptop-code"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Horário Laboratórios</span>
+            <div class="link-badge">2025</div>
+          </a>
+
+          <a href="https://drive.google.com/drive/folders/1spHXFp2SzoGu_9Yz_Z_mfRpkFNQOErb5?usp=sharing" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-clock"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Horário de Aula</span>
+            <div class="link-badge">2025</div>
+          </a>
+
+          <a href="https://drive.google.com/drive/folders/1dkDvXEXRpoDlydOZTaYbJKcv-Xus2erv?usp=sharing" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-address-book"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Carômetro</span>
+            <div class="link-badge">Alunos</div>
+          </a>
+
+          <a href="https://drive.google.com/file/d/18u3enIzkQpiAxru3y1nIFIL3aGFR1oXF/view?pli=1" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-calendar-alt"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Calendário</span>
+            <div class="link-badge">Letivo</div>
+          </a>
+
+          <a href="mailto:provasvicenterijo@gmail.com" class="app-link">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-file-alt"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>E-mail de Provas</span>
+            <div class="link-badge">Provas</div>
+          </a>
+
+          <a href="mailto:vicenterijosimulado@gmail.com" class="app-link">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-envelope-open-text"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>E-mail Simulado</span>
+            <div class="link-badge">Simulado</div>
+          </a>
+
+          <a href="https://www.sere.pr.gov.br/" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-leaf"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>SERE</span>
+            <div class="link-badge">Secretaria</div>
+          </a>
+
+          <a href="https://resultados.provaparana.pr.gov.br/" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-star"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Prova Paraná</span>
+            <div class="link-badge">Avaliação</div>
+          </a>
+
+          <a href="http://www.diaadiaeducacao.pr.gov.br/login" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-lightbulb"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Dia a Dia Educação</span>
+            <div class="link-badge">Educação</div>
+          </a>
+
+          <a href="https://app.powerbi.com/home?language=pt-BR" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-chart-bar"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Power BI</span>
+            <div class="link-badge">BI</div>
+          </a>
+
+          <a href="https://appsouparana.paas.pr.gov.br/login" class="app-link" target="_blank" rel="noopener">
+            <div class="link-icon" aria-hidden="true">
+              <i class="fas fa-wallet"></i>
+              <div class="icon-glow"></div>
+            </div>
+            <span>Contracheque</span>
+            <div class="link-badge">Financeiro</div>
+          </a>
+        </div>
+      </section>
 
       <!-- Tutorial Button -->
-      <a href="https://drive.google.com/" class="tutorial-btn">
-        <i class="fas fa-book-open"></i> Tutoriais e Manuais
-      </a>
+      <section class="tutorial-section">
+        <a href="https://drive.google.com/drive/folders/1rq3KHVImarur4tzKsy179r81jUss5-MF" class="tutorial-btn" target="_blank" rel="noopener">
+          <div class="tutorial-content">
+            <div class="tutorial-icon">
+              <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            </div>
+            <div class="tutorial-text">
+              <span class="tutorial-title">Tutoriais e Manuais</span>
+              <span class="tutorial-subtitle">Clique para acessar a documentação</span>
+            </div>
+            <div class="tutorial-arrow">
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+            </div>
+          </div>
+        </a>
+      </section>
 
-      <div class="social-media">
+      <!-- Redes Sociais -->
+      <section class="social-media">
         <p>Siga-nos nas redes sociais:</p>
-        <a href="https://www.instagram.com/cevicenterijo_oficial" target="_blank" class="social-icon instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.facebook.com/Vicente-Rijo-100011188428175" target="_blank" class="social-icon facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-    </div>
-    
+        <div class="social-icons-container">
+          <a href="https://instagram.com/cevicenterijo_oficial" class="social-icon instagram" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://facebook.com/Vicente-Rijo-100011188428175" class="social-icon facebook" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
     </main>
-
 
     <!-- Footer -->
     <footer class="app-footer">
-      <p>Desenvolvido com <i class="fas fa-heart"></i> por <a href="http://linktr.ee/profbt">Prof. Bruno Carvalho</a>, 2025</p>
+      <span>Desenvolvido com </span>
+      <span class="footer-heart" aria-label="amor">❤️</span>
+      <span> por </span>
+      <a href="https://profbt.vercel.app" target="_blank" rel="noopener" class="footer-author">Prof. Bruno Carvalho</a>
+      <span> | Colégio Vicente Rijo</span>
+      <br>
+      <span class="footer-copyright">® 2025 - Todos os direitos reservados.</span>
     </footer>
+  </div>
+
+  <!-- SPLASHSCREEN INFORMATIVA (editar/ativar/desativar via JS) -->
+  <div id="splash-informativo" style="display:none;">
+    <div class="splash-content">
+      <!-- Imagem opcional -->
+      <img id="splash-img" src="" alt="" style="display:none;max-width:220px;margin-bottom:18px;border-radius:12px;box-shadow:0 4px 24px #14305c33;">
+      <!-- Mensagem -->
+      <div id="splash-msg" class="splash-msg"></div>
+      <!-- Botão opcional -->
+      <a id="splash-btn" href="#" target="_blank" rel="noopener" class="splash-btn" style="display:none;"></a>
+    </div>
   </div>
 
   <!-- JavaScript -->
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/splash.js"></script>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js');
-      });
-    }
-  </script>
+  <!-- Botão de instalação do PWA (inserido via JS) -->
+  <div id="pwa-install-btn" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;"></div>
 </body>
 </html>
