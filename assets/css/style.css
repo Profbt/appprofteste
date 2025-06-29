@@ -307,6 +307,8 @@ body {
   overflow: hidden;
   border: 2px solid transparent;
   font-family: 'Exo 2', 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  border-bottom: none !important;
+  margin-bottom: 10px;
 }
 
 .emergency-btn::before {
@@ -332,11 +334,17 @@ body {
 }
 
 .emergency-btn:active,
-.emergency-btn:focus,
+.emergency-btn:focus {
+  border-radius: 20px 20px 0 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
 .emergency-btn[aria-expanded="true"] {
   border-radius: 20px 20px 0 0 !important;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+  border-bottom: 2px solid #ffd700 !important;
 }
 
 /* Indicador de clique para contatos */
@@ -432,6 +440,10 @@ body {
   padding: 30px;
   background: var(--card-bg);
   animation: none;
+}
+
+.contacts-container:not(.hidden) {
+  border-top: 2px solid #ffd700;
 }
 
 .contacts-container.hidden {

@@ -44,22 +44,22 @@ class ModernApp {
     }
     
     // Alternar tema
-    themeToggle.addEventListener('click', () => {
+    themeToggle.addEventListener('click', (e) => {
+      e.preventDefault();
       const currentTheme = body.className;
       const newTheme = currentTheme === 'light-mode' ? 'dark-mode' : 'light-mode';
-      
       body.className = newTheme;
       localStorage.setItem('theme', newTheme);
-      
-      // Feedback visual
-      themeToggle.style.transform = 'scale(1.2) rotate(180deg)';
+      // Feedback visual simplificado
+      themeToggle.classList.add('theme-toggle-anim');
       setTimeout(() => {
-        themeToggle.style.transform = '';
+        themeToggle.classList.remove('theme-toggle-anim');
       }, 300);
-      // Remover foco visual após clique
-      themeToggle.blur();
     });
-    
+
+    // Remover qualquer evento de blur após o clique
+    themeToggle.onblur = null;
+
     // Observar mudanças na preferência do sistema
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       if (!localStorage.getItem('theme')) {

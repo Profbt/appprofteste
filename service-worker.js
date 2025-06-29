@@ -1,9 +1,9 @@
 // Service Worker Otimizado - Portal do Professor v2.0
 // Cache Strategy: Cache First para recursos estáticos, Network First para HTML
-// APÓS ATUALIZAR A SPLASHSCREEN, AUMENTE A VERSÃO DOS CACHE ABAIXO: 
-const CACHE_NAME = 'prof-vrijo-v2.3';
-const STATIC_CACHE = 'static-v2.3';
-const DYNAMIC_CACHE = 'dynamic-v2.3';
+
+const CACHE_NAME = 'prof-vrijo-v2.1.5';
+const STATIC_CACHE = 'static-v2.1.5';
+const DYNAMIC_CACHE = 'dynamic-v2.1.5';
 
 // Recursos estáticos essenciais (cache imediato)
 const STATIC_ASSETS = [

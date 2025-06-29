@@ -2,15 +2,14 @@
 // Edite o objeto abaixo para ativar/desativar, trocar mensagem, imagem, botão e datas
 // Para desativar, basta colocar ativo: false ou ajustar as datas
 // Para imagens do Google Drive, use o formato: https://drive.google.com/uc?id=ID_DA_IMAGEM
-// Após fazer qualquer alteração precisa alterar a versão do serviçe worker.
 
 const splashConfig = {
   ativo: false, // true para ativar, false para desativar manualmente
   dataInicio: '2025-06-28', // formato: 'YYYY-MM-DD'
   dataFim: '2025-06-29',
-  mensagem: 'AGORA VAI DAR CERTO.<br>Todos são bem vindos!',
+  mensagem: 'Compareça a nossa festa Junina!, traga sua família.<br>Todos são bem vindos!',
   botao: {
-    texto: 'VAMOS LÁ', //deixe vazio para desativar o botão
+    texto: 'Não esqueça', //deixe vazio para desativar o botão
     url: ''
   },
   imagem: '' // Agora usando imagem local
@@ -75,6 +74,16 @@ const splashConfig = {
 
   // Exibir splash
   splash.style.display = 'flex';
+
+  // Adicionar logo no topo da splash, se ainda não existir
+  if (!splash.querySelector('.splash-logo')) {
+    const logo = document.createElement('img');
+    logo.src = 'assets/images/logo.png';
+    logo.alt = 'Logo Colégio Vicente Rijo';
+    logo.className = 'splash-logo';
+    logo.style.cssText = 'width: 80px; height: 80px; object-fit: contain; margin: 0 auto 12px auto; display: block;';
+    splash.querySelector('.splash-content').prepend(logo);
+  }
 
   // Ícone X de fechar no canto superior direito
   const closeIcon = document.createElement('button');
